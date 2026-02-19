@@ -1,7 +1,11 @@
 
 import React from 'react';
 
-const Pricing: React.FC = () => {
+interface PricingProps {
+  onOpenModal: (plan: { name: string; price: string }) => void;
+}
+
+const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
   const newFeatures = [
     "Coaching Korah IA 24/7 via WhatsApp",
     "Treinos 100% personalizados",
@@ -94,11 +98,14 @@ const Pricing: React.FC = () => {
                 ))}
               </ul>
 
-              <button className={`w-full py-4 md:py-5 rounded-2xl md:rounded-3xl font-black text-base md:text-lg uppercase italic transition-all active:scale-95 ${
-                plan.highlight 
-                ? 'korah-gradient text-white shadow-xl shadow-[#FF5A1F]/20 border-none' 
-                : 'bg-white text-[#FF5A1F] border-2 border-[#FF5A1F] hover:bg-[#FF5A1F]/5 shadow-lg shadow-[#FF5A1F]/5'
-              }`}>
+              <button
+                onClick={() => onOpenModal({ name: plan.name, price: plan.price })}
+                className={`w-full py-4 md:py-5 rounded-2xl md:rounded-3xl font-black text-base md:text-lg uppercase italic transition-all active:scale-95 ${
+                  plan.highlight
+                  ? 'korah-gradient text-white shadow-xl shadow-[#FF5A1F]/20 border-none hover:brightness-110'
+                  : 'bg-white text-[#FF5A1F] border-2 border-[#FF5A1F] hover:bg-[#FF5A1F]/5 shadow-lg shadow-[#FF5A1F]/5'
+                }`}
+              >
                 {plan.cta}
               </button>
             </div>

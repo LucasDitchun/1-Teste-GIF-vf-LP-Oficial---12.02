@@ -1,7 +1,6 @@
 
-import React, { useCallback } from 'react';
+import React, { useState } from 'react';
 import Hero from './components/Hero';
-import Partners from './components/Partners';
 import WhatIsKorah from './components/WhatIsKorah';
 import WhyMostFail from './components/WhyMostFail';
 import Features from './components/Features';
@@ -13,10 +12,13 @@ import CoachesSection from './components/CoachesSection';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import WaitlistModal from './components/WaitlistModal';
 
 const App: React.FC = () => {
   const logoUrl = "https://i.ibb.co/tTsg21hr/Logo-korah.png";
   const faqImageAbove = "https://i.ibb.co/6c9MdCKR/Chat-GPT-Image-10-de-fev-de-2026-21-09-15.png";
+
+  const [modalPlan, setModalPlan] = useState<{ name: string; price: string } | null>(null);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -72,9 +74,15 @@ const App: React.FC = () => {
         </div>
       </nav>
 
+      <WaitlistModal
+        isOpen={!!modalPlan}
+        onClose={() => setModalPlan(null)}
+        planName={modalPlan?.name ?? ''}
+        planPrice={modalPlan?.price ?? ''}
+      />
+
       <main>
         <div id="hero"><Hero onCtaClick={() => scrollToSection('pricing-section')} /></div>
-        <Partners />
         <div id="how-it-works"><WhatIsKorah /></div>
         <div id="benefits"><WhyMostFail /></div>
         <Features />
@@ -83,7 +91,7 @@ const App: React.FC = () => {
         <div id="testimonials"><Testimonials /></div>
         <StatsSection />
         <CoachesSection />
-        <div id="pricing-section"><Pricing /></div>
+        <div id="pricing-section"><Pricing onOpenModal={(plan) => setModalPlan(plan)} /></div>
         
         {/* Espaço para a imagem acima do FAQ */}
         <div className="bg-black py-12 flex justify-center">

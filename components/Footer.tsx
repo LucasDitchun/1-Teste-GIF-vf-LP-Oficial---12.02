@@ -49,7 +49,9 @@ const Footer: React.FC = () => {
                 <h4 className="text-sm font-black uppercase tracking-widest text-[#FF5A1F]">Institucional</h4>
                 <ul className="space-y-4 text-gray-500 font-medium">
                    <li><a href="#" className="hover:text-white transition-colors">Membros Fundadores</a></li>
-                   <li><a href="#" className="hover:text-white transition-colors">Privacidade</a></li>
+                   <li><a href="https://app.korah.fit/legal/privacidade" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Privacidade</a></li>
+                   <li><a href="https://app.korah.fit/legal/terms" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Termos de Uso</a></li>
+                   <li><a href="https://app.korah.fit/legal/cookies" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Política de Cookies</a></li>
                 </ul>
              </div>
 
@@ -71,7 +73,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-             <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">© 2024 KORAH.IA - TODOS OS DIREITOS RESERVADOS</p>
+             <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">© 2026 KORAH - TODOS OS DIREITOS RESERVADOS</p>
              <p className="text-[10px] text-gray-600 font-black italic uppercase tracking-tighter">Evoluir é inevitável.</p>
           </div>
        </div>
