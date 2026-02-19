@@ -1,7 +1,10 @@
 
 import React from 'react';
+import { useScrollReveal, useScrollRevealStagger } from '../hooks/useScrollReveal';
 
 const Features: React.FC = () => {
+  const headerRef = useScrollReveal({ variant: 'fade-up' });
+  const cardsRef = useScrollRevealStagger({ variant: 'fade-up', interval: 80 });
   const features = [
     {
       title: "Treinos via WhatsApp",
@@ -66,9 +69,9 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#F5F5F3]">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="text-center mb-16 space-y-4">
+    <section className="py-24 pb-40 bg-[#F5F5F3] section-blend-to-black">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
+        <div ref={headerRef} className="text-center mb-16 space-y-4">
           <h2 className="text-4xl md:text-6xl font-black text-black tracking-tight leading-tight uppercase italic">
             Tudo que você precisa para <span className="text-[#FF5A1F]">evoluir</span>
           </h2>
@@ -77,10 +80,11 @@ const Features: React.FC = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div ref={cardsRef} className="max-w-3xl mx-auto space-y-4">
           {features.map((f, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
+              data-sr-child
               className="bg-white p-6 md:p-8 rounded-[32px] flex items-center gap-6 shadow-sm border border-black/5 hover:border-[#FF5A1F]/20 transition-all group"
             >
               <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#FFF1EB] flex items-center justify-center shrink-0 text-[#FF5A1F] transition-transform group-hover:scale-110">

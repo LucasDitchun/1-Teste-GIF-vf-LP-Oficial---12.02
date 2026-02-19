@@ -1,7 +1,14 @@
 
 import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Hero: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) => {
+  const badgeRef = useScrollReveal({ variant: 'fade-down', threshold: 0.1 });
+  const headlineRef = useScrollReveal({ variant: 'fade-up', delay: 150, threshold: 0.1 });
+  const subtitleRef = useScrollReveal({ variant: 'fade-up', delay: 300, threshold: 0.1 });
+  const buttonRef = useScrollReveal({ variant: 'scale-up', delay: 450, threshold: 0.1 });
+  const socialRef = useScrollReveal({ variant: 'fade-up', delay: 600, threshold: 0.1 });
+  const mockupRef = useScrollReveal({ variant: 'fade-up', delay: 400, threshold: 0.1 });
   const athletes = [
     "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200&h=200&fit=crop&q=95", 
     "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&q=95", 
@@ -18,13 +25,13 @@ const Hero: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) => {
         <div className="flex flex-col items-center text-center">
           
           {/* Badge com efeito de brilho (animate-glow) aplicado no contorno laranja */}
-          <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-[#FFF1EB]/50 border border-[#FF5A1F]/30 text-[#FF5A1F] text-[10px] md:text-[11px] font-black uppercase tracking-[0.15em] italic mb-8 gap-3 animate-glow">
+          <div ref={badgeRef} className="inline-flex items-center px-5 py-2.5 rounded-full bg-[#FFF1EB]/50 border border-[#FF5A1F]/30 text-[#FF5A1F] text-[10px] md:text-[11px] font-black uppercase tracking-[0.15em] italic mb-8 gap-3 animate-glow">
             <img src={korahLogoIcon} alt="Logo" className="w-4 h-4 md:w-5 md:h-5 object-contain" />
             Treinador 24/07 com IA no WhatsApp
           </div>
           
           {/* Headline em 3 linhas conforme imagem - Ajustado leading para evitar sobreposição */}
-          <div className="mb-8 max-w-4xl">
+          <div ref={headlineRef} className="mb-8 max-w-4xl">
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[82px] font-[900] leading-[1.25] md:leading-[1.18] tracking-tighter text-[#1A1A1A] uppercase italic">
               Treino que se<br />
               <span className="text-[#FF5A1F]">adaptam a você.</span><br />
@@ -33,12 +40,12 @@ const Hero: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) => {
           </div>
           
           {/* Subheadline */}
-          <p className="text-lg md:text-2xl text-gray-500 max-w-3xl leading-relaxed font-medium mb-10 px-4">
+          <p ref={subtitleRef} className="text-lg md:text-2xl text-gray-500 max-w-3xl leading-relaxed font-medium mb-10 px-4">
             A Korah usa inteligência artificial e ciência para criar planos de corrida personalizados que evoluem com você direto no WhatsApp.
           </p>
 
           {/* Botão de Vídeo */}
-          <div className="mb-12">
+          <div ref={buttonRef} className="mb-12">
             <button className="group flex items-center gap-4 px-8 py-4 rounded-full border border-gray-100 bg-[#F9F9F9] shadow-sm hover:shadow-md transition-all active:scale-95">
               <div className="w-10 h-10 rounded-full korah-gradient flex items-center justify-center shadow-lg shadow-[#FF5A1F]/20 group-hover:scale-110 transition-transform">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M5 3L19 12L5 21V3Z" /></svg>
@@ -50,7 +57,7 @@ const Hero: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) => {
           </div>
 
           {/* Prova Social: 5 fotos + texto */}
-          <div className="flex items-center gap-4 mb-20">
+          <div ref={socialRef} className="flex items-center gap-4 mb-20">
             <div className="flex -space-x-3">
               {athletes.map((src, i) => (
                 <img key={i} src={src} className="w-10 h-10 md:w-14 md:h-14 rounded-full border-2 border-white object-cover shadow-lg" alt="Atleta" />
@@ -62,7 +69,7 @@ const Hero: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) => {
           </div>
 
           {/* Mockup iPhone + 6 Cards */}
-          <div className="w-full max-w-6xl mx-auto mt-10">
+          <div ref={mockupRef} className="w-full max-w-6xl mx-auto mt-10">
             <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
               
               {/* Cards da Esquerda */}

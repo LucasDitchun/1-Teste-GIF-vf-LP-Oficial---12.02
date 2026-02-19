@@ -1,13 +1,16 @@
 
 import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Footer: React.FC = () => {
+  const contentRef = useScrollReveal({ variant: 'fade-in' });
+  const copyrightRef = useScrollReveal({ variant: 'fade-in', delay: 200 });
   const logoUrl = "https://i.ibb.co/tTsg21hr/Logo-korah.png";
 
   return (
     <footer className="py-20 border-t border-white/10 bg-black">
        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 text-center md:text-left">
+          <div ref={contentRef} className="grid md:grid-cols-4 gap-12 text-center md:text-left">
              <div className="col-span-2 space-y-6 flex flex-col items-center md:items-start">
                 <div className="flex items-center">
                   <img src={logoUrl} alt="Korah Logo" className="h-10 w-auto object-contain" />
@@ -72,7 +75,7 @@ const Footer: React.FC = () => {
              </div>
           </div>
           
-          <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div ref={copyrightRef} className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
              <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">© 2026 KORAH - TODOS OS DIREITOS RESERVADOS</p>
              <p className="text-[10px] text-gray-600 font-black italic uppercase tracking-tighter">Evoluir é inevitável.</p>
           </div>

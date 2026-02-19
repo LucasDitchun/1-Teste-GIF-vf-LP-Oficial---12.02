@@ -1,11 +1,16 @@
 
 import React from 'react';
+import { useScrollReveal, useScrollRevealStagger } from '../hooks/useScrollReveal';
 
 interface PricingProps {
   onOpenModal: (plan: { name: string; price: string }) => void;
 }
 
 const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
+  const titleRef = useScrollReveal({ variant: 'fade-up' });
+  const subtitleRef = useScrollReveal({ variant: 'fade-up', delay: 100 });
+  const cardsRef = useScrollRevealStagger({ variant: 'fade-up', interval: 150 });
+  const trustRef = useScrollReveal({ variant: 'fade-in', delay: 500 });
   const newFeatures = [
     "Coaching Korah IA 24/7 via WhatsApp",
     "Treinos 100% personalizados",
@@ -55,18 +60,19 @@ const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
     <section id="pricing-section" className="py-24 md:py-32 relative bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16 md:mb-20 space-y-4 px-2">
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white leading-[1.1]">
+          <h2 ref={titleRef} className="text-4xl sm:text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white leading-[1.1]">
             ESCOLHA SEU <span className="text-[#FF5A1F]">PLANO.</span>
           </h2>
-          <p className="text-gray-400 font-medium text-base md:text-xl max-w-4xl mx-auto leading-relaxed">
+          <p ref={subtitleRef} className="text-gray-400 font-medium text-base md:text-xl max-w-4xl mx-auto leading-relaxed">
             Treinos exclusivos, benefícios reais e acompanhamento 24/7 por menos que uma assessoria tradicional — evolua com quem vive a corrida como você.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto items-stretch">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto items-stretch">
           {plans.map((plan, i) => (
-            <div 
+            <div
               key={i}
+              data-sr-child
               className={`relative p-8 sm:p-10 rounded-[40px] md:rounded-[48px] border transition-all duration-500 group flex flex-col ${
                 plan.highlight 
                 ? 'bg-[#111] border-[#FF5A1F]/40 shadow-2xl shadow-[#FF5A1F]/10 lg:scale-105 z-10' 
@@ -112,7 +118,7 @@ const Pricing: React.FC<PricingProps> = ({ onOpenModal }) => {
           ))}
         </div>
         
-        <div className="mt-12 md:mt-16 text-center px-4">
+        <div ref={trustRef} className="mt-12 md:mt-16 text-center px-4">
           <p className="text-[9px] md:text-[10px] text-gray-700 font-black uppercase tracking-[0.3em] md:tracking-[0.4em]">Pagamento Seguro via Stripe & Ebanx</p>
         </div>
       </div>

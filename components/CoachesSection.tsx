@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface Coach {
   id: string;
@@ -12,6 +13,10 @@ interface Coach {
 }
 
 const CoachesSection: React.FC = () => {
+  const headerRef = useScrollReveal({ variant: 'fade-up' });
+  const cardRef = useScrollReveal({ variant: 'fade-up', delay: 150 });
+  const selectorRef = useScrollReveal({ variant: 'fade-up', delay: 300 });
+
   const [activeCoachIndex, setActiveCoachIndex] = useState(0);
 
   const coaches: Coach[] = [
@@ -96,11 +101,11 @@ const CoachesSection: React.FC = () => {
   const currentCoach = coaches[activeCoachIndex];
 
   return (
-    <section className="py-20 md:py-32 bg-white overflow-hidden">
+    <section className="py-20 md:py-32 bg-white overflow-hidden section-blend-to-black">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Header da Seção - Minimalista e Espaçado */}
-        <div className="text-center mb-10 md:mb-14 space-y-4">
+        <div ref={headerRef} className="text-center mb-10 md:mb-14 space-y-4">
           <div className="flex items-center justify-center gap-3">
              <div className="h-[1px] w-6 bg-[#FF5A1F]/30"></div>
              <span className="text-[#FF5A1F] text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em]">Time de Elite</span>
@@ -115,7 +120,7 @@ const CoachesSection: React.FC = () => {
         </div>
 
         {/* Card Principal - Proporção Panorâmica (Wider & Shorter) */}
-        <div className="max-w-6xl mx-auto bg-[#F9F9F9] border border-gray-100 rounded-[28px] sm:rounded-[40px] overflow-hidden flex flex-col lg:flex-row items-stretch mb-10 md:mb-12 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.02)]">
+        <div ref={cardRef} className="max-w-6xl mx-auto bg-[#F9F9F9] border border-gray-100 rounded-[28px] sm:rounded-[40px] overflow-hidden flex flex-col lg:flex-row items-stretch mb-10 md:mb-12 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.02)]">
           
           {/* Foto do Treinador */}
           <div className="lg:w-[32%] min-h-[350px] sm:min-h-[450px] lg:min-h-0 relative">
@@ -153,7 +158,7 @@ const CoachesSection: React.FC = () => {
         </div>
 
         {/* Seletor de Treinadores - Pill Style Compacto */}
-        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 px-2">
+        <div ref={selectorRef} className="flex flex-wrap items-center justify-center gap-2 md:gap-4 px-2">
           {coaches.map((coach, index) => (
             <button
               key={coach.id}

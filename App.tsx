@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useScrollReveal } from './hooks/useScrollReveal';
 import Hero from './components/Hero';
 import WhatIsKorah from './components/WhatIsKorah';
 import WhyMostFail from './components/WhyMostFail';
@@ -17,6 +18,8 @@ import WaitlistModal from './components/WaitlistModal';
 const App: React.FC = () => {
   const logoUrl = "https://i.ibb.co/tTsg21hr/Logo-korah.png";
   const faqImageAbove = "https://i.ibb.co/6c9MdCKR/Chat-GPT-Image-10-de-fev-de-2026-21-09-15.png";
+
+  const faqImageRef = useScrollReveal({ variant: 'scale-up' });
 
   const [modalPlan, setModalPlan] = useState<{ name: string; price: string } | null>(null);
 
@@ -95,10 +98,10 @@ const App: React.FC = () => {
         
         {/* Espaço para a imagem acima do FAQ */}
         <div className="bg-black py-12 flex justify-center">
-          <div className="max-w-6xl mx-auto px-6">
-            <img 
-              src={faqImageAbove} 
-              alt="IA Interface Korah" 
+          <div ref={faqImageRef} className="max-w-6xl mx-auto px-6">
+            <img
+              src={faqImageAbove}
+              alt="IA Interface Korah"
               className="w-full h-auto rounded-[32px] md:rounded-[56px] shadow-2xl border border-white/5"
             />
           </div>

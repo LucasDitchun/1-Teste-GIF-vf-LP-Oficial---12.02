@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface CountUpProps {
   end: number;
@@ -69,6 +70,10 @@ const CountUp: React.FC<CountUpProps> = ({ end, duration = 2000, suffix = "", sh
 };
 
 const StatsSection: React.FC = () => {
+  const headlineRef = useScrollReveal({ variant: 'fade-up' });
+  const cardRef = useScrollReveal({ variant: 'scale-up', delay: 100 });
+  const manifestoRef = useScrollReveal({ variant: 'fade-up', delay: 200 });
+
   const stats = [
     { target: 200, suffix: "+", label: "Atletas ativos" },
     { target: 32, suffix: "%", label: "Melhora média" },
@@ -82,7 +87,7 @@ const StatsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Headline Externa - Impacto Máximo - Ajustado leading */}
-        <div className="text-center mb-12">
+        <div ref={headlineRef} className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-[#1A1A1A] tracking-tighter leading-[1.1] md:leading-none uppercase italic">
             QUEM TREINA COM A <br className="md:hidden" />
             KORAH <span className="text-[#FF5A1F]">VENCE.</span>
@@ -90,7 +95,7 @@ const StatsSection: React.FC = () => {
         </div>
 
         {/* Container do Card */}
-        <div className="bg-[#F8F8F8] border border-gray-100 rounded-[32px] sm:rounded-[40px] md:rounded-[64px] p-8 md:p-20 shadow-sm">
+        <div ref={cardRef} className="bg-[#F8F8F8] border border-gray-100 rounded-[32px] sm:rounded-[40px] md:rounded-[64px] p-8 md:p-20 shadow-sm">
           
           {/* Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-y-10 md:gap-y-12 lg:gap-4 text-center items-center">
@@ -114,7 +119,7 @@ const StatsSection: React.FC = () => {
           <div className="w-full h-[1px] bg-gray-200/60 max-w-5xl mx-auto my-12 md:my-20"></div>
 
           {/* Manifesto & Value Prop */}
-          <div className="max-w-4xl mx-auto text-center px-2">
+          <div ref={manifestoRef} className="max-w-4xl mx-auto text-center px-2">
             <p className="text-base md:text-2xl text-gray-600 font-medium leading-relaxed mb-8 md:mb-12">
               Não acreditamos em mágica. Acreditamos em <span className="text-black font-extrabold">dados, consistência e recuperação inteligente.</span> Junte-se à Elite que escolheu treinar com a Korah.
             </p>

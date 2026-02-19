@@ -1,7 +1,10 @@
 
 import React, { useState } from 'react';
+import { useScrollReveal, useScrollRevealStagger } from '../hooks/useScrollReveal';
 
 const FAQ: React.FC = () => {
+  const titleRef = useScrollReveal({ variant: 'fade-up' });
+  const itemsRef = useScrollRevealStagger({ variant: 'fade-up', interval: 100 });
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs = [
@@ -26,15 +29,15 @@ const FAQ: React.FC = () => {
   return (
     <section id="faq" className="py-24 md:py-32 bg-[#050505]">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center mb-12 md:mb-16 px-2">
+        <div ref={titleRef} className="text-center mb-12 md:mb-16 px-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-white leading-tight">
             DÚVIDAS <span className="text-[#FF5A1F]">FREQUENTES</span>
           </h2>
         </div>
 
-        <div className="space-y-4">
+        <div ref={itemsRef} className="space-y-4">
           {faqs.map((faq, i) => (
-            <div key={i} className="rounded-2xl md:rounded-3xl border border-white/5 bg-black overflow-hidden transition-all">
+            <div key={i} data-sr-child className="rounded-2xl md:rounded-3xl border border-white/5 bg-black overflow-hidden transition-all">
               <button 
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full p-6 md:p-8 flex items-center justify-between text-left hover:bg-white/[0.02] gap-4"

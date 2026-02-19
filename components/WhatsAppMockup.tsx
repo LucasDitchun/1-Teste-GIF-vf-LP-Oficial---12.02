@@ -1,7 +1,11 @@
 
 import React from 'react';
+import { useScrollReveal, useScrollRevealStagger } from '../hooks/useScrollReveal';
 
 const WhatsAppMockup: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) => {
+  const headingRef = useScrollReveal({ variant: 'fade-right' });
+  const benefitsRef = useScrollRevealStagger({ variant: 'fade-up', interval: 80 });
+  const phoneRef = useScrollReveal({ variant: 'fade-left', delay: 200 });
   const benefits = [
     "Planos para 5K, 10K, Meia e Maratona",
     "Integração com Garmin, Strava e Apple Watch",
@@ -18,7 +22,7 @@ const WhatsAppMockup: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) =>
           
           {/* COLUNA DA ESQUERDA: TEXTO E BENEFÍCIOS (AGORA PRIMEIRO) */}
           <div className="flex flex-col text-left order-1 lg:order-1">
-            <h2 className="text-4xl md:text-6xl font-black text-black tracking-tighter leading-[0.95] uppercase italic mb-6">
+            <h2 ref={headingRef} className="text-4xl md:text-6xl font-black text-black tracking-tighter leading-[0.95] uppercase italic mb-6">
               Treino profissional, <br />
               <span className="text-[#FF5A1F]">direto no bolso</span>
             </h2>
@@ -27,9 +31,9 @@ const WhatsAppMockup: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) =>
               Esqueça planilhas complicadas ou apps que você nunca abre. Com o Korah, seu treino chega onde você já está: no WhatsApp.
             </p>
 
-            <div className="space-y-4 mb-12">
+            <div ref={benefitsRef} className="space-y-4 mb-12">
               {benefits.map((benefit, i) => (
-                <div key={i} className="flex items-center gap-4 group">
+                <div key={i} data-sr-child className="flex items-center gap-4 group">
                   <div className="w-6 h-6 rounded-full border border-[#FF5A1F]/40 flex items-center justify-center shrink-0 group-hover:bg-[#FF5A1F]/10 transition-colors">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12"></polyline>
@@ -52,7 +56,7 @@ const WhatsAppMockup: React.FC<{ onCtaClick: () => void }> = ({ onCtaClick }) =>
           </div>
 
           {/* COLUNA DA DIREITA: MOCKUP DA INTERFACE (AGORA DEPOIS) */}
-          <div className="relative flex justify-center lg:justify-start order-2 lg:order-2">
+          <div ref={phoneRef} className="relative flex justify-center lg:justify-start order-2 lg:order-2">
             {/* Background Decorativo - Círculos */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none">
               <div className="absolute top-10 left-10 w-32 h-32 border border-[#FF5A1F]/10 rounded-full animate-float"></div>

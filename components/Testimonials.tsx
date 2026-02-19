@@ -1,7 +1,11 @@
 
 import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Testimonials: React.FC = () => {
+  const titleRef = useScrollReveal({ variant: 'fade-up' });
+  const marqueeRef = useScrollReveal({ variant: 'fade-in', delay: 250 });
+  const dividerRef = useScrollReveal({ variant: 'fade-in', delay: 400 });
   const testimonials = [
     {
       quote: "A integração com o WhatsApp é genial. Não preciso abrir app nenhum, só olho a mensagem e saio para correr.",
@@ -38,7 +42,7 @@ const Testimonials: React.FC = () => {
 
   return (
     <section className="py-24 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
+      <div ref={titleRef} className="max-w-7xl mx-auto px-6 mb-16 text-center">
         <h2 className="text-4xl md:text-6xl font-black text-black tracking-tight leading-tight mb-4">
           Resultados <span className="text-[#FF5A1F] italic">reais</span>
         </h2>
@@ -48,7 +52,7 @@ const Testimonials: React.FC = () => {
       </div>
 
       {/* MARQUEE DINÂMICO - CARDS PEQUENOS E DELICADOS */}
-      <div className="relative flex overflow-x-hidden group">
+      <div ref={marqueeRef} className="relative flex overflow-x-hidden group">
         <div className="flex animate-marquee whitespace-nowrap py-6">
           {doubledTestimonials.map((t, i) => (
             <div 
@@ -95,7 +99,7 @@ const Testimonials: React.FC = () => {
       </div>
 
       {/* PROVA SOCIAL - LARANJA CONFORME SOLICITADO */}
-      <div className="mt-20 flex items-center justify-center gap-4">
+      <div ref={dividerRef} className="mt-20 flex items-center justify-center gap-4">
         <div className="h-[1.5px] w-12 bg-[#FF5A1F]"></div>
         <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#FF5A1F] italic">
           Prova Social

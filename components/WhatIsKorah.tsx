@@ -1,7 +1,11 @@
 
 import React from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const WhatIsKorah: React.FC = () => {
+  const leftColRef = useScrollReveal({ variant: 'fade-right' });
+  const rightColRef = useScrollReveal({ variant: 'fade-left', delay: 150 });
+  const taglineRef = useScrollReveal({ variant: 'fade-up', delay: 400 });
   // Link direto para o novo GIF com transparência fornecido (bvTu8)
   const gifUrl = "https://s12.gifyu.com/images/bvTu8.gif";
 
@@ -11,7 +15,7 @@ const WhatIsKorah: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
           {/* COLUNA: TEXTO - Centralizado no Mobile (text-center), Esquerda no Desktop (lg:text-left) */}
-          <div className="flex flex-col text-center lg:text-left pt-4 order-1">
+          <div ref={leftColRef} className="flex flex-col text-center lg:text-left pt-4 order-1">
             <div className="mb-10 md:mb-12">
               <p className="text-3xl md:text-5xl font-bold text-[#1A1A1A] tracking-tight mb-1">
                 Sua jornada
@@ -36,7 +40,7 @@ const WhatIsKorah: React.FC = () => {
               </p>
             </div>
 
-            <div className="mt-4">
+            <div ref={taglineRef} className="mt-4">
               <p className="text-2xl md:text-3xl font-[900] text-[#FF5A1F] tracking-tight mb-2">
                 Treino profissional
               </p>
@@ -47,7 +51,7 @@ const WhatIsKorah: React.FC = () => {
           </div>
 
           {/* COLUNA: GIF ANIMADO (MOCKUP DO WHATSAPP) */}
-          <div className="flex flex-col items-center lg:items-center order-2">
+          <div ref={rightColRef} className="flex flex-col items-center lg:items-center order-2">
             <div className="relative w-full max-w-[300px] sm:max-w-[340px] md:max-w-[420px] mb-8 md:mb-12">
               <img 
                 src={gifUrl} 

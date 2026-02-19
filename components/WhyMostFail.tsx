@@ -1,7 +1,13 @@
 
 import React from 'react';
+import { useScrollReveal, useScrollRevealStagger } from '../hooks/useScrollReveal';
 
 const WhyMostFail: React.FC = () => {
+  const titleRef = useScrollReveal({ variant: 'fade-up' });
+  const imageRef = useScrollReveal({ variant: 'scale-up' });
+  const painPointsRef = useScrollRevealStagger({ variant: 'fade-up', interval: 100 });
+  const quoteRef = useScrollReveal({ variant: 'fade-right' });
+  const ctaRef = useScrollReveal({ variant: 'scale-up' });
   // Ícones SVG estilizados para a lista de pontos
   const FileIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -62,13 +68,13 @@ const WhyMostFail: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         
         {/* TITULO CORRIGIDO E SEPARADO */}
-        <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black text-black tracking-tighter leading-[1.1] md:leading-[0.95] uppercase italic mb-12">
+        <h2 ref={titleRef} className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-black text-black tracking-tighter leading-[1.1] md:leading-[0.95] uppercase italic mb-12">
           Por que a maioria <br className="hidden md:block" />
           falha na <span className="text-[#FF5A1F]">corrida</span>
         </h2>
 
         {/* IMAGEM QUADRADA */}
-        <div className="flex justify-center mb-16 md:mb-20">
+        <div ref={imageRef} className="flex justify-center mb-16 md:mb-20">
           <div className="w-full max-w-[320px] sm:max-w-[480px] md:max-w-[627px] aspect-square overflow-hidden rounded-[24px] md:rounded-[40px] shadow-2xl">
             <img 
               src={impactImageUrl} 
@@ -81,9 +87,9 @@ const WhyMostFail: React.FC = () => {
         {/* LISTA DE PONTOS */}
         <div className="max-w-3xl mx-auto space-y-12 md:space-y-16 text-left">
           
-          <div className="space-y-6 md:space-y-8">
+          <div ref={painPointsRef} className="space-y-6 md:space-y-8">
             {painPoints.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 md:gap-6 group">
+              <div key={i} data-sr-child className="flex items-center gap-4 md:gap-6 group">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-[#FFF1EB] flex items-center justify-center shrink-0 text-[#FF5A1F]">
                   {item.icon}
                 </div>
@@ -94,7 +100,7 @@ const WhyMostFail: React.FC = () => {
             ))}
           </div>
 
-          <div className="pt-8 border-l-[4px] md:border-l-[10px] border-[#FF5A1F] pl-6 md:pl-12 space-y-2">
+          <div ref={quoteRef} className="pt-8 border-l-[4px] md:border-l-[10px] border-[#FF5A1F] pl-6 md:pl-12 space-y-2">
             <h3 className="text-lg sm:text-xl md:text-5xl font-extrabold text-black leading-tight tracking-tight italic uppercase">
               A maioria das pessoas não falha na corrida.
             </h3>
@@ -103,8 +109,8 @@ const WhyMostFail: React.FC = () => {
             </h3>
           </div>
 
-          <div className="pt-6">
-            <button 
+          <div ref={ctaRef} className="pt-6">
+            <button
               onClick={scrollToPricing}
               className="w-full md:w-auto px-10 py-5 md:px-16 md:py-8 rounded-[20px] md:rounded-[36px] bg-[#FF5A1F] text-white font-black text-lg sm:text-xl md:text-3xl uppercase tracking-tighter shadow-xl hover:brightness-110 hover:-translate-y-2 transition-all italic"
             >
